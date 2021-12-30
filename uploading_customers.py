@@ -14,7 +14,7 @@ mail_jet_secret = os.getenv("mailjet_secret")
 
 def mailjet_uploads(customer_emails, mail_jet_key, mail_jet_secret):
     mailjet = Client(auth=(mail_jet_key, mail_jet_secret), version='v3')
-    id = '36157'
+    id = 'ID'
     for email in customer_emails:
         print(email)
         data = {
@@ -42,10 +42,10 @@ def Upload_Contacts(all_companies, password):
                 writer.writerow(["Company", "Account ID", "Access Status"])
                 for company, company_id in all_companies.items():
                     print(f"working on {company}......")
-                    response = requests.get(f'https://cp.serverdata.net/webservices/restapi/v1/api/identities/accounts?customerID={company_id}', headers=headers)
+                    response = requests.get(f'https://website.com/webservices/restapi/v1/api/identities/accounts?customerID={company_id}', headers=headers)
                     information = response.json()
                     customer_id = information[f"{company_id}"]
-                    customer_json = requests.get(f'https://cp.serverdata.net/webservices/restapi/v1/api/accounts/{customer_id}/contacts', headers=headers)
+                    customer_json = requests.get(f'https://website.com/webservices/restapi/v1/api/accounts/{customer_id}/contacts', headers=headers)
                     customer_info = customer_json.json()
                     if len(customer_info) == 3:
                         emails = [emails["email"] for emails in customer_info["items"]]
