@@ -12,7 +12,7 @@ def website_password(client_key, client_secret):
     options = Options()
     options.headless = True
     driver = webdriver.Chrome(options = options, executable_path = r"C:\Program Files\Google\Chrome\Application\\chromedriver.exe")
-    website = driver.get("https://cp.serverdata.net/webservices/restapi/docs-ui/index#!/Identities_translation_(for_migration_purposes)/IdentitiesV1_GetAccountIdentities")
+    website = driver.get("https://website.com/webservices/restapi/docs-ui/index#!/Identities_translation_(for_migration_purposes)/IdentitiesV1_GetAccountIdentities")
     driver.find_element_by_id("input_clientID").send_keys(client_key)
     driver.find_element_by_id("input_clientSecret").send_keys(client_secret)
     time.sleep(1)
@@ -41,11 +41,11 @@ def company_contact_information(all_companies, password):
                 writer = csv.writer(companies)
                 writer.writerow(["Company", "Account ID", "Access Status"])
                 for company, company_id in all_companies.items():
-                    response = requests.get(f'https://cp.serverdata.net/webservices/restapi/v1/api/identities/accounts?customerID={company_id}', headers=headers)
+                    response = requests.get(f'https://website.com/webservices/restapi/v1/api/identities/accounts?customerID={company_id}', headers=headers)
                     print(f"Working on {company}......")
                     information = response.json()
                     customer_id = information[f"{company_id}"]
-                    customer_json = requests.get(f'https://cp.serverdata.net/webservices/restapi/v1/api/accounts/{customer_id}/contacts', headers=headers)
+                    customer_json = requests.get(f'https://website.com/webservices/restapi/v1/api/accounts/{customer_id}/contacts', headers=headers)
                     customer_info = customer_json.json()
                     if len(customer_info) == 3:
                         emails = [emails["email"] for emails in customer_info["items"]]
